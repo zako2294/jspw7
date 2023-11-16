@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        function validateCreditCardNumber(creditCardNumber) {
+  // Convert the credit card number to a string and remove any non-digit characters
+  creditCardNumber = creditCardNumber.toString().replace(/\D/g, '');
+
+  // Convert the credit card number string to an array of digits and reverse it
+  let digits = creditCardNumber.split('').reverse();
+
+  // Apply Luhn's algorithm to calculate the check digit
+  let sum = digits.reduce(function(total, digit, index) {
+    // Double the value of every second digit
+    if (index % 2 === 1) {
+      digit *= 2;
+      // If the doubled value is greater than 9, subtract 9 from it
+      if (digit > 9) {
+        digit -= 9;
+      }
+    }
+    return total + parseInt(digit);
+  }, 0);
+
+  // Check if the sum is divisible by 10
+  let isValid = sum % 10 === 0;
+
+  // Display the credit card number, calculated check digit, and validation message
+  console.log(`Credit Card Number: ${creditCardNumber}`);
+  console.log(`Check Digit: ${digits[0]}`);
+  console.log(`Validation: ${isValid ? 'Validated' : 'Not Validated'}`);
+}
+
+// Test the function with a credit card number
+const creditCardNumber = '45320151128336';
+validateCreditCardNumber(creditCardNumber);
+    </script>
+</body>
+</html>

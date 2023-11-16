@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        function calculateChange(amount) {
+  const banknotes = [200, 100, 50, 20, 10, 5, 1];
+  let banknotesReturned = [];
+
+  banknotes.forEach(function(banknote) {
+    let banknoteCount = Math.floor(amount / banknote);
+    banknotesReturned[banknote] = banknoteCount;
+    amount %= banknote;
+  });
+
+  return banknotesReturned;
+}
+
+// Test the function with an example amount
+const amount = 369;
+const change = calculateChange(amount);
+
+console.log(`Change for ${amount} Manat:`);
+change.forEach(function(count, banknote) {
+  if (count > 0) {
+    console.log(`${count}x ${banknote} Manat banknote`);
+  }
+});
+    </script>
+</body>
+</html>
